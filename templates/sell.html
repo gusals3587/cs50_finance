@@ -1,0 +1,39 @@
+<!--TODO-->
+{% extends "layout.html" %}
+
+{% block title %} index {% endblock %}
+
+{% block main %}
+<form action="{{ url_for('sell') }}" method="post">
+	<table style="width:100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th>NAME</th>
+			<th>STOCK</th>
+			<th>QUANTITY</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for purchase in purchases %}
+		<tr>
+			<td>{{ purchase["symbol"] }}</td>
+			<td>{{ purchase["quantity"] }}</td>
+			<td>
+				<select class="form-control" name="{{ purchase["symbol"] }}">
+					{% for i in range(1, purchase["quantity"] + 1) %}
+					<option>{{ i }}</option>
+					{% endfor %}
+				</select>
+			</td>
+		{% endfor%}
+		</tbody>
+		<tfoot>
+		<tr>	
+			<td></td>
+			<td></td>
+			<td><button class="btn btn-default" type="submit">Sell</button></td>
+		</tr>
+		</tfoot>
+	</table>
+</form>
+{% endblock %}

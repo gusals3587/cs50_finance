@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %} index {% endblock %}
+
+{% block main %}
+<table style="width:100%" class="table table-striped">
+	<thead>
+	<tr>
+		<th>name</th>
+		<th>number of stock</th>
+		<th>price/per stock</th>
+		<th>total price</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for purchase in purchases %}
+	{% if purchase["quantity"] > 0 %}
+	<tr>
+		<td>{{ purchase["symbol"] }}</td>
+		<td>{{ purchase["quantity"] }}</td>
+		<td>{{ purchase["price"] }}</td>
+		<td>{{ purchase["total_price"]|round(2) }}</td>
+	{% endif %}
+	{% endfor%}
+	<tr>
+		<td>CASH</td>
+		<td></td>
+		<td></td>
+		<td>{{ user_cash|round(2) }}</td>
+	</tr>
+	</tbody>
+	<tfoot>
+	<tr>	
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>{{ (user_cash + grand_total)|round(2) }}</td>
+	</tr>
+	</tfoot>
+</table>
+{% endblock %}

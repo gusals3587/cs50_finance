@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %} index {% endblock %}
+
+{% block main %}
+<table style="width:100%" class="table">
+	<thead>
+	<tr>
+		<th>NAME</th>
+		<th>PRICE WHEN BOUGHT</th>
+		<th>NUM</th>
+		<th>TIME</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for purchase in purchases %}
+	<tr class={% if purchase["sold"] == 0 %}"danger"{% else %}"success"{% endif %}>
+		<td>{{ purchase["symbol"] }}</td>
+		<td>{{ purchase["price"] }}</td>
+		<td>{{ purchase["quantity"] }}</td>
+		<td>{{ purchase["date"] }}</td>
+	{% endfor%}
+</table>
+{% endblock %}
